@@ -1,11 +1,10 @@
 {
-  "scripts": {
-    "build": "your-build-command-here"
-  }
-}
-{
   "name": "visitor-api",
   "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "start": "node index.js"
+  },
   "dependencies": {
     "@azure/data-tables": "^13.2.0"
   }
