@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "build": "your-build-command-here"
+  }
+}
+{
   "name": "visitor-api",
   "version": "1.0.0",
   "dependencies": {
