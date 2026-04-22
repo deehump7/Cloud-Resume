@@ -2,7 +2,7 @@
   "name": "visitor-api",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'No build step required'",
+    "build": "echo Build complete",
     "start": "node index.js"
   },
   "dependencies": {
