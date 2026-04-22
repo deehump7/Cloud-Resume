@@ -73,15 +73,19 @@ document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
 // ===========================
 async function updateCounter() {
   try {
-    const response = await fetch("/api/GetVisitorCount")
-    if (!response.ok) throw new Error("Counter fetch failed");
-    const data = await response.text();
-    document.getElementById("visitor-count").innerText = data;
-  } catch (err) {
-    console.error("Visitor counter error:", err);
-    document.getElementById("visitor-count").innerText = "N/A";
+    const response = await fetch("/api/GetVisitorCount");
+
+    if (!response.ok) {
+      throw new Error("Counter fetch failed");
+    }
+
+    const data = await response.json();
+    document.getElementById("counter").innerText = data.count;
+  } catch (error) {
+    console.error("Visitor counter error:", error);
   }
 }
+
 updateCounter();
 
 // ===========================
