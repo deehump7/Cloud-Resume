@@ -68,6 +68,17 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
+// ===========================
+// VISITOR COUNTER
+// ===========================
+async function updateCounter() {
+  const response = await fetch("https://your-function-url/api/GetVisitorCount");
+  const data = await response.text();
+
+  document.getElementById("visitor-count").innerText = data;
+}
+
+updateCounter();
 
 // ===========================
 // MAGIC CURSOR TRAIL
