@@ -71,13 +71,20 @@ document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
 // ===========================
 // VISITOR COUNTER
 // ===========================
+// ===========================
+// VISITOR COUNTER
+// ===========================
 async function updateCounter() {
-  const response = await fetch("https://your-function-url/api/GetVisitorCount");
-  const data = await response.text();
-
-  document.getElementById("visitor-count").innerText = data;
+  try {
+    const response = await fetch("https://vistor-counter-bpa6d8bqfwfwfje5.canadacentral-01.azurewebsites.net/api/GetVisitorCount");
+    if (!response.ok) throw new Error("Counter fetch failed");
+    const data = await response.text();
+    document.getElementById("visitor-count").innerText = data;
+  } catch (err) {
+    console.error("Visitor counter error:", err);
+    document.getElementById("visitor-count").innerText = "N/A";
+  }
 }
-
 updateCounter();
 
 // ===========================
