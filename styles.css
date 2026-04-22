@@ -1,0 +1,601 @@
+/* ============================================
+   KAR Digital Technologies — Resume Site
+   Delreka Humphries
+   styles.css
+   ============================================ */
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6230;
+  --parchment: #f5edd6;
+  --parchment-dark: #e8d9b5;
+  --ink: #1a1008;
+  --ink-soft: #2e1f0a;
+  --burgundy: #4a0e0e;
+  --deep-navy: #0d1b2e;
+  --stone: #3a3028;
+  --magic-blue: #1a3a5c;
+  --ember: #c44b1e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #0a0804;
+  color: var(--parchment);
+  font-family: 'Crimson Text', serif;
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cline x1='10' y1='0' x2='10' y2='20' stroke='%23c9a84c' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23c9a84c'/%3E%3C/svg%3E"), auto;
+}
+
+/* ===========================
+   STARFIELD
+   =========================== */
+#stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: var(--gold-light);
+  border-radius: 50%;
+  animation: twinkle var(--dur) infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.4); }
+}
+
+/* ===========================
+   FLOATING PARTICLES
+   =========================== */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatUp var(--fdur) linear infinite;
+  opacity: 0;
+  font-size: 12px;
+  color: var(--gold);
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* ===========================
+   HEADER / GREAT HALL
+   =========================== */
+header {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  z-index: 1;
+  background: radial-gradient(ellipse at 50% 0%, #1a0f05 0%, #0a0804 70%);
+}
+
+.candles-row {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.candle {
+  position: absolute;
+  bottom: 0;
+  animation: candleFloat var(--cdur) ease-in-out infinite;
+}
+.candle::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: var(--ch);
+  background: linear-gradient(to top, #d4a43a, #f5e6b0);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+.candle::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 80%, #fff8c0, #f5a020 40%, #e05000 80%, transparent 100%);
+  border-radius: 50% 50% 30% 30%;
+  margin: -2px auto 0;
+  animation: flicker 0.3s ease-in-out infinite alternate;
+}
+@keyframes candleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+@keyframes flicker {
+  0% { transform: scaleX(1) scaleY(1); opacity: 1; }
+  100% { transform: scaleX(0.8) scaleY(1.2); opacity: 0.85; }
+}
+
+.crest {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+  animation: crestGlow 3s ease-in-out infinite;
+}
+@keyframes crestGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--gold-dim)); }
+  50% { filter: drop-shadow(0 0 20px var(--gold)); }
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 2px 0 #4a3010;
+  animation: titleReveal 1.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  line-height: 1.1;
+}
+@keyframes titleReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: var(--parchment-dark);
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+  animation: titleReveal 1.5s 0.3s ease-out forwards;
+  opacity: 0;
+  letter-spacing: 0.05em;
+}
+
+.house-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.5rem;
+  padding: 8px 20px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  animation: titleReveal 1.5s 0.6s ease-out forwards;
+  opacity: 0;
+  background: rgba(201,168,76,0.05);
+}
+
+.contact-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  animation: titleReveal 1.5s 0.9s ease-out forwards;
+  opacity: 0;
+}
+.contact-row a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.contact-row a:hover { color: var(--gold); border-color: var(--gold-dim); }
+
+/* ===========================
+   SCROLL INDICATOR
+   =========================== */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-dim);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  animation: titleReveal 1.5s 1.2s ease-out forwards, bobScroll 2s 2.7s ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes bobScroll {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+}
+
+/* ===========================
+   MAIN CONTENT
+   =========================== */
+main { position: relative; z-index: 1; }
+
+.scroll-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.scroll-section.visible { opacity: 1; transform: translateY(0); }
+
+/* ===========================
+   CHAPTER DIVIDERS
+   =========================== */
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.chapter-divider::before,
+.chapter-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ===========================
+   PARCHMENT CARDS
+   =========================== */
+.parchment-card {
+  background: linear-gradient(135deg, #2a1f0f 0%, #1e1508 50%, #2a1f0f 100%);
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.parchment-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(201,168,76,0.03) 28px,
+    rgba(201,168,76,0.03) 29px
+  );
+  pointer-events: none;
+}
+.parchment-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 30px rgba(201,168,76,0.12), inset 0 0 30px rgba(201,168,76,0.03);
+}
+.parchment-card .corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--gold-dim);
+  border-style: solid;
+  opacity: 0.6;
+}
+.parchment-card .corner.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+.parchment-card .corner.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+.parchment-card .corner.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+.parchment-card .corner.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+.job-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.job-company {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: var(--parchment-dark);
+  font-size: 1rem;
+}
+.job-date {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  white-space: nowrap;
+  padding-top: 4px;
+}
+.job-body {
+  color: #c8b896;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.job-body ul { padding-left: 1.2rem; }
+.job-body li { margin-bottom: 0.3rem; }
+.job-body li::marker { color: var(--gold-dim); }
+
+/* ===========================
+   SKILLS RUNES
+   =========================== */
+.runes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.rune {
+  padding: 6px 16px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-dim);
+  background: rgba(201,168,76,0.04);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.rune::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.rune:hover { color: var(--ink); border-color: var(--gold); }
+.rune:hover::after { opacity: 1; }
+.rune span { position: relative; z-index: 1; }
+
+/* ===========================
+   CERTIFICATIONS / SPELLS
+   =========================== */
+.spell-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.spell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,168,76,0.03);
+  transition: border-color 0.3s, background 0.3s;
+}
+.spell:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.07);
+}
+.spell-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+.spell-desc {
+  font-size: 0.85rem;
+  color: #9a8a6a;
+}
+.spell-wand {
+  color: var(--gold-dim);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   FEATURED PROJECT CARD
+   =========================== */
+.project-card {
+  background: linear-gradient(135deg, #0d1b2e 0%, #0a1220 100%);
+  border: 1px solid #1a3a5c;
+  border-radius: 4px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at center, rgba(26,90,140,0.08) 0%, transparent 60%);
+  animation: orbRotate 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes orbRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.project-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 40px rgba(201,168,76,0.1);
+}
+.project-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+}
+.project-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: #7aa8d4;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1rem;
+}
+.tech-tag {
+  padding: 4px 12px;
+  background: rgba(26,90,140,0.3);
+  border: 1px solid #1a3a5c;
+  border-radius: 2px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: #7aa8d4;
+  transition: all 0.3s;
+}
+.tech-tag:hover {
+  background: rgba(26,90,140,0.6);
+  border-color: #378add;
+  color: #b5d4f4;
+}
+
+/* ===========================
+   PROFILE SUMMARY
+   =========================== */
+.summary-text {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--parchment-dark);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  font-style: italic;
+}
+.summary-text::first-letter {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  float: left;
+  line-height: 0.75;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+/* ===========================
+   EDUCATION
+   =========================== */
+.edu-block {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.edu-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px var(--gold-dim));
+}
+.edu-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.edu-school {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: var(--parchment-dark);
+}
+.edu-detail {
+  font-size: 0.9rem;
+  color: #9a8a6a;
+  margin-top: 4px;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+.footer-quote {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold-dim);
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+}
+.footer-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #4a3a1a;
+}
+
+/* ===========================
+   MAGIC CURSOR TRAIL
+   =========================== */
+.spark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+  animation: sparkFade 0.6s ease-out forwards;
+}
+@keyframes sparkFade {
+  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1) translateY(-15px); }
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 600px) {
+  .job-header { flex-direction: column; }
+  .scroll-section { padding: 3rem 1.25rem; }
+  header h1 { font-size: 2.5rem; }
+}
