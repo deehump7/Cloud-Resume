@@ -29,4 +29,9 @@
     ".svg": "image/svg+xml",
     ".webp": "image/webp"
   }
+  {
+  "dependencies": {
+    "@azure/data-tables": "^13.2.0"
+  }
+}
 }
