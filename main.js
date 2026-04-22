@@ -71,12 +71,9 @@ document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
 // ===========================
 // VISITOR COUNTER
 // ===========================
-// ===========================
-// VISITOR COUNTER
-// ===========================
 async function updateCounter() {
   try {
-    const response = await fetch("https://vistor-counter-bpa6d8bqfwfwfje5.canadacentral-01.azurewebsites.net/api/GetVisitorCount");
+    const response = await fetch("/api/GetVisitorCount")
     if (!response.ok) throw new Error("Counter fetch failed");
     const data = await response.text();
     document.getElementById("visitor-count").innerText = data;
