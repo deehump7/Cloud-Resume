@@ -73,13 +73,15 @@ document.querySelectorAll('.scroll-section').forEach(s => observer.observe(s));
 // ===========================
 async function getVisitorCount() {
   try {
-    const res = await fetch("https://visitor-counter-g3a7htaze9cfdbga.canadacentral-01.azurewebsites.net/api/GetVisitorCount");
-;
-   const data = await res.json();
-     document.getElementById("visitor-count").textContent = data.visitorCount;
+    const res = await fetch(
+      "https://visitor-counter-g3a7htaze9cfdbga.canadacentral-01.azurewebsites.net/api/GetVisitorCount"
+    );
+    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+    const data = await res.json();
+    document.getElementById("visitor-count").textContent = data.visitorCount;
   } catch (err) {
-     console.error("Visitor count failed:" , err);
-     document.getElementByID("visitor-count").textContent = "N/A";
+    console.error("Visitor count failed:", err);
+    document.getElementById("visitor-count").textContent = "N/A";
   }
 }
 getVisitorCount();
