@@ -46,7 +46,7 @@ jobs:
           action: upload
           app_location: "/"           # your HTML/CSS/JS
           api_location: "api"         # your Azure Function
-          output_location: ""
+          output_location: ""          # empty = no build step, serve files as-is
 
   # ── Verify live site after deploy ─────────────────────────
   verify:
