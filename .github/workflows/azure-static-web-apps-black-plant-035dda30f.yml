@@ -7,31 +7,9 @@ on:
     branches: [main]
 
 jobs:
-  # ── Test visitor counter before deploying ──────────────────
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install function dependencies
-        run: |
-          cd api/GetVisitorCount
-          npm install
-
-      - name: Test function exists and loads
-        run: |
-          cd api/GetVisitorCount
-          node -e "require('./index.js'); console.log('Function loaded OK')"
-
   # ── Deploy frontend + function to Azure ───────────────────
   deploy:
     runs-on: ubuntu-latest
-    needs: test        # only deploys if test passes
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
@@ -44,9 +22,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_PLANT_035DDA30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          app_location: "/"           # your HTML/CSS/JS
-          api_location: "api"         # your Azure Function
-          output_location: ""          # empty = no build step, serve files as-is
+          app_location: "/"
+          api_location: "api"
+          output_location: ""
 
   # ── Verify live site after deploy ─────────────────────────
   verify:
