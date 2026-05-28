@@ -654,3 +654,269 @@ footer {
   .scroll-section { padding: 3rem 1.25rem; }
   header h1 { font-size: 2.5rem; }
 }
+/* ===========================
+   STICKY SIDE NAV
+   =========================== */
+#side-nav {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 1.2rem 0.6rem;
+  background: rgba(10, 8, 4, 0.85);
+  border-right: 1px solid rgba(201,168,76,0.15);
+  border-radius: 0 8px 8px 0;
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  margin-bottom: 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 0.5rem;
+  color: var(--gold-dim);
+  text-decoration: none;
+  border-radius: 50%;
+  transition: color 0.3s, background 0.3s;
+}
+.nav-links a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 38px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  background: rgba(10,8,4,0.95);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 4px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+  background: rgba(201,168,76,0.1);
+}
+.nav-links a:hover::after { opacity: 1; }
+.nav-links a.active { color: var(--gold); }
+
+/* ===========================
+   RESPONSIVE — TABLET 768px
+   =========================== */
+@media (max-width: 768px) {
+  #side-nav { display: none; }
+  .scroll-section { padding: 4rem 1.5rem; }
+  .contact-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .runes-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-tech { gap: 6px; }
+  .job-header { flex-direction: column; gap: 0.25rem; }
+  header h1 { font-size: 3rem; }
+  .project-links { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ===========================
+   RESPONSIVE — MOBILE 480px
+   =========================== */
+@media (max-width: 480px) {
+  header h1 { font-size: 2.2rem; }
+  .scroll-section { padding: 3rem 1.25rem; }
+  .runes-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .spell-list { gap: 0.75rem; }
+  .visitor-num { font-size: 1.4rem; }
+}
+
+/* ===========================
+   PRINT STYLESHEET
+   =========================== */
+@media print {
+  /* Hide all decorative elements */
+  #stars, #particles, #side-nav,
+  .candles-row, .spark,
+  .scroll-hint,
+  .crest { display: none !important; }
+
+  /* Reset background and colors */
+  *, *::before, *::after {
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    cursor: default !important;
+  }
+
+  header {
+    min-height: auto !important;
+    padding: 1.5rem 2rem 1rem !important;
+    border-bottom: 2px solid #111;
+    page-break-after: avoid;
+    background: #fff !important;
+  }
+
+  header h1 {
+    font-size: 24pt !important;
+    color: #111 !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .subtitle {
+    font-size: 11pt !important;
+    color: #444 !important;
+  }
+
+  .house-badge {
+    font-size: 8pt !important;
+    color: #666 !important;
+    letter-spacing: 0.1em;
+    margin: 0.5rem 0 !important;
+  }
+
+  .contact-row {
+    flex-wrap: wrap !important;
+    gap: 0.4rem 1rem !important;
+    justify-content: center !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .contact-row a {
+    color: #111 !important;
+    font-size: 9pt !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  main { padding: 0 !important; }
+
+  .scroll-section {
+    padding: 1rem 2rem !important;
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .chapter-divider {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .chapter-title {
+    font-size: 13pt !important;
+    color: #111 !important;
+    letter-spacing: 0.05em !important;
+    background: none !important;
+    -webkit-text-fill-color: #111 !important;
+  }
+
+  .chapter-divider::before,
+  .chapter-divider::after {
+    border-color: #aaa !important;
+    flex: 1;
+  }
+
+  .parchment-card {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.75rem !important;
+    page-break-inside: avoid;
+  }
+
+  .parchment-card .corner { display: none !important; }
+
+  .job-title { font-size: 11pt !important; font-weight: 700 !important; color: #111 !important; }
+  .job-company { font-size: 10pt !important; color: #333 !important; }
+  .job-date { font-size: 9pt !important; color: #555 !important; }
+  .job-body li { font-size: 10pt !important; color: #222 !important; margin-bottom: 2pt; }
+
+  .runes-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4px !important;
+  }
+
+  .rune {
+    background: #f5f5f5 !important;
+    border: 1px solid #ccc !important;
+    padding: 3px 6px !important;
+  }
+
+  .rune span { font-size: 8pt !important; color: #222 !important; }
+
+  .project-card {
+    background: #fafafa !important;
+    border: 1px solid #ccc !important;
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.75rem !important;
+    page-break-inside: avoid;
+  }
+
+  .project-card .corner,
+  .project-card::before { display: none !important; }
+
+  .project-title { font-size: 12pt !important; color: #111 !important; }
+  .project-subtitle { font-size: 10pt !important; color: #444 !important; }
+  .tech-tag {
+    background: #eee !important;
+    border: 1px solid #ccc !important;
+    color: #222 !important;
+    font-size: 7pt !important;
+  }
+
+  .project-links { display: none !important; }
+
+  .spell { border-left: 2px solid #ccc !important; }
+  .spell-name { color: #111 !important; font-size: 10pt !important; }
+  .spell-desc { color: #444 !important; font-size: 9pt !important; }
+
+  .edu-title { color: #111 !important; }
+  .edu-school { color: #333 !important; }
+  .edu-detail { color: #555 !important; }
+
+  .visitor-counter, footer { display: none !important; }
+
+  /* Page setup */
+  @page {
+    margin: 1.5cm 2cm;
+    size: A4;
+  }
+}

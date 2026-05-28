@@ -100,3 +100,21 @@ document.addEventListener('mousemove', (e) => {
   document.body.appendChild(spark);
   setTimeout(() => spark.remove(), 600);
 });
+
+// ===========================
+// NAV ACTIVE STATE
+// ===========================
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('.scroll-section');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(s => navObserver.observe(s));
